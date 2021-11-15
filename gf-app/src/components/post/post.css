@@ -38,15 +38,19 @@ margin: 0 10px;
 font-style: 12px;
 }
 
+/*
 .postTopRight {
 
 }
+*/
 
 .postCenter {
   margin: 20px 0;
 }
 
+/*
 .postText {}
+*/
 .postImg {
   margin-top: 20px;
   width: 100%;
@@ -75,9 +79,11 @@ font-style: 12px;
   font-style: 15px;
 }
 
+/*
 .postBottomRight {
 
 }
+*/
 
 .postCommentText{
   cursor: pointer;
