@@ -8,6 +8,8 @@ export default function Sidebar() {
           <img src="/assets/test-musician.png" alt="Man" className="card-img"/>
           <h1>First Last</h1>
           <p class="title">@userName</p>
+          <h2>Muscian/Venue</h2>
+          <p>Instruments/Genre/"Scene"</p>
           <p><button>Visit Profile</button></p>
         </div>
         <div className="friendsListDiv">
