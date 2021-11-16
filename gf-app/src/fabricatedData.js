@@ -90,7 +90,6 @@ export const Posts = [
   },
   {
     id:5,
-    desc: "B/W",
     photo: "assets/post-5.png",
     date: "1 day ago",
     userID: 10,
@@ -126,7 +125,6 @@ export const Posts = [
   },
   {
     id:9,
-    desc: "Sick \m/",
     photo: "assets/post-9.png",
     date: "3 days ago",
     userID: 4,
