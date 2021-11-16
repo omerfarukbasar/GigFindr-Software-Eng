@@ -77,6 +77,31 @@ button:hover, a:hover {
   margin-bottom: 15px;
 }
 
+.sidebarTitle {
+  margin-bottom: 20px;
+}
+
+.sidebarProfileImgContainer {
+  margin-right: 10px;
+  position: relative;
+}
+
+.sidebarOnline {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: limegreen;
+  position: absolute;
+  top: -1px;
+  right: 0;
+  left: 22px;
+  border: 2px solid white;
+}
+
+.sidebarUsername {
+  font-weight: 100;
+}
+
 .friendsImg {
   width: 32px;
   height: 32px;

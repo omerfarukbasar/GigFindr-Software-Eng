@@ -14,97 +14,73 @@ export default function Sidebar() {
         </div>
         <div className="friendsListDiv">
           <hr className="sidebarHR" />
+          <h4 className="sidebarTitle">Online Friends</h4>
           <ul className="friendsList">
             <li className="Friend">
-            <img src="/assets/john-doe.jpg" alt="friend img" className="friendsImg"/>
-            <span>John Doe</span>
+              <div className="sidebarProfileImgContainer">
+                <img src="/assets/john-doe.jpg" alt="friend img" className="friendsImg"/>
+                <span className="sidebarOnline"></span>
+              </div>
+              <span className="sidebarUsername">John Doe</span>
             </li>
 
             <li className="Friend">
-            <img src="/assets/john-doe.jpg" alt="friend img" className="friendsImg"/>
-            <span>John Doe</span>
+              <div className="sidebarProfileImgContainer">
+                <img src="/assets/john-doe.jpg" alt="friend img" className="friendsImg"/>
+                <span className="sidebarOnline"></span>
+              </div>
+              <span className="sidebarUsername">John Doe</span>
             </li>
-
+            
             <li className="Friend">
-            <img src="/assets/john-doe.jpg" alt="friend img" className="friendsImg"/>
-            <span>John Doe</span>
+              <div className="sidebarProfileImgContainer">
+                <img src="/assets/john-doe.jpg" alt="friend img" className="friendsImg"/>
+                <span className="sidebarOnline"></span>
+              </div>
+              <span className="sidebarUsername">John Doe</span>
             </li>
-
+            
             <li className="Friend">
-            <img src="/assets/john-doe.jpg" alt="friend img" className="friendsImg"/>
-            <span>John Doe</span>
+              <div className="sidebarProfileImgContainer">
+                <img src="/assets/john-doe.jpg" alt="friend img" className="friendsImg"/>
+                <span className="sidebarOnline"></span>
+              </div>
+              <span className="sidebarUsername">John Doe</span>
             </li>
-
+            
             <li className="Friend">
-            <img src="/assets/john-doe.jpg" alt="friend img" className="friendsImg"/>
-            <span>John Doe</span>
+              <div className="sidebarProfileImgContainer">
+                <img src="/assets/john-doe.jpg" alt="friend img" className="friendsImg"/>
+                <span className="sidebarOnline"></span>
+              </div>
+              <span className="sidebarUsername">John Doe</span>
             </li>
-
+           
             <li className="Friend">
-            <img src="/assets/john-doe.jpg" alt="friend img" className="friendsImg"/>
-            <span>John Doe</span>
+              <div className="sidebarProfileImgContainer">
+                <img src="/assets/john-doe.jpg" alt="friend img" className="friendsImg"/>
+                <span className="sidebarOnline"></span>
+              </div>
+              <span className="sidebarUsername">John Doe</span>
             </li>
-
+           
             <li className="Friend">
-            <img src="/assets/john-doe.jpg" alt="friend img" className="friendsImg"/>
-            <span>John Doe</span>
+              <div className="sidebarProfileImgContainer">
+                <img src="/assets/john-doe.jpg" alt="friend img" className="friendsImg"/>
+                <span className="sidebarOnline"></span>
+              </div>
+              <span className="sidebarUsername">John Doe</span>
             </li>
-
+           
             <li className="Friend">
-            <img src="/assets/john-doe.jpg" alt="friend img" className="friendsImg"/>
-            <span>John Doe</span>
-            </li>
-
-            <li className="Friend">
-            <img src="/assets/john-doe.jpg" alt="friend img" className="friendsImg"/>
-            <span>John Doe</span>
-            </li>
-
-            <li className="Friend">
-            <img src="/assets/john-doe.jpg" alt="friend img" className="friendsImg"/>
-            <span>John Doe</span>
-            </li>
-
-            <li className="Friend">
-            <img src="/assets/john-doe.jpg" alt="friend img" className="friendsImg"/>
-            <span>John Doe</span>
-            </li>
-
-            <li className="Friend">
-            <img src="/assets/john-doe.jpg" alt="friend img" className="friendsImg"/>
-            <span>John Doe</span>
-            </li>
-
-            <li className="Friend">
-            <img src="/assets/john-doe.jpg" alt="friend img" className="friendsImg"/>
-            <span>John Doe</span>
-            </li>
-
-            <li className="Friend">
-            <img src="/assets/john-doe.jpg" alt="friend img" className="friendsImg"/>
-            <span>John Doe</span>
-            </li>
-
-            <li className="Friend">
-            <img src="/assets/john-doe.jpg" alt="friend img" className="friendsImg"/>
-            <span>John Doe</span>
-            </li>
-
-            <li className="Friend">
-            <img src="/assets/john-doe.jpg" alt="friend img" className="friendsImg"/>
-            <span>John Doe</span>
-            </li>
-
-            <li className="Friend">
-            <img src="/assets/john-doe.jpg" alt="friend img" className="friendsImg"/>
-            <span>John Doe</span>
-            </li>
-
-            <li className="Friend">
-            <img src="/assets/john-doe.jpg" alt="friend img" className="friendsImg"/>
-            <span>John Doe</span>
+              <div className="sidebarProfileImgContainer">
+                <img src="/assets/john-doe.jpg" alt="friend img" className="friendsImg"/>
+                <span className="sidebarOnline"></span>
+              </div>
+              <span className="sidebarUsername">John Doe</span>
             </li>
           </ul>
+          
         </div>
       </div>
     </div>
