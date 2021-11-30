@@ -1,27 +1,220 @@
 /* Body */
 * {}
-body {}
+body {  width: 100%;
+  background-color: #EEEEEE;
+  font-family: 'Roboto', sans-serif;
+}
 
 /* Form */
-.formContainer {}
-.formHeader {}
-.headerButton{}
-.formBody{}
-.formFooter {}
-.saveForm{}
+.formContainer {
+  color: white;
+  font-family: 'Roboto', sans-serif;
+  text-align: center;
+  font-size: 28px;
+  background-color: grey;
+  border-radius: 5px;
+  box-shadow: 0px 0px 16px 0px rgba(50, 50, 50, 0.61);
+  width: 500px;
+  height: 100%;
+  margin: auto;
+  margin-top: 75px;
+}
+
+.formHeader {
+  height: 50px;
+  margin-bottom: 40px;
+  position: relative;
+}
+
+.formBody {
+  height: 70%;
+}
+
+.formFooter {
+  height: 100px;
+}
+
+.saveForm {
+  outline: none;
+  border: none;
+  color: white;
+  font-size: 20px;
+  width: 150px;
+  height: 40px;
+  background-color: plum;
+  margin-top: 20px;
+  transition: all 0.3s ease;
+}
+
+.saveForm:hover {
+  background-color: light;
+  color: lightgrey;
+}
+
+.headerActive {
+  margin: 0px;
+  padding: 0px;
+  display: inline-block;
+  width: 50%;
+  height: 100%;
+  background-color: #3F3F3F;
+  color: white !important;
+}
+
+.headerInActive {
+  margin: 0px;
+  padding: 0px;
+  display: inline-block;
+  width: 50%;
+  height: 100%;
+  background-color: plum;
+  color: #3F3F3F;
+  transition: all 0.3s ease;
+}
+
+.headerInActive:hover {
+  background-color: #3F3F3F;
+}
+
+.headerButton {
+  outline: none;
+  border: none;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 20px;
+  background-color: transparent;
+  transition: all 0.5s ease;
+  padding-top: 10px;
+  color: white;
+  z-index: 12;
+}
+
+input {
+  outline: none;
+  border: none;
+  background-color: transparent;
+  height: 40px;
+  border-bottom: 2px solid plum;
+  color: white;
+  font-size: 18px;
+}
+
+input::placeholder {
+  color: red;
+}
+
+.inputSection{
+  margin-bottom: 25px;
+  width: 90%;
+  margin: auto;
+  margin-bottom: 25px;
+}
 
 /* Form Specifics */
-.headerText{}
-.firstName{}
-.inputLabel{}
-.lastName{}
-.inputSection{}
-.emailAddress{}
-.password{}
+.headerText {
+  margin-top: 5px;
+  margin-bottom: 25px;
+  z-index: 12;
+}
 
-/* Sign Up */
-.signUpContainer{}
-.inputSectionSplit{}
+.firstName {
+  width: 100%;
+  display: block;
+  transition: 0.3s ease all; 
+}
+.lastName {
+  width: 100%;
+  display: block;
+  transition: 0.3s ease all; 
+}
+.inputLabel {
+  pointer-events: none;
+  display: block;
+  font-size: 18px;
+  color: white;
+  transform: translateY(-25px);
+  transition: 0.4s ease all;
+  text-align: left;
+}
+.emailAddress {
+  width: 100%;
+  display: block;
+  transition: 0.3s ease all;
+}
+.password {
+  width: 100%;
+  display: block;
+  transition: 0.3s ease all;
+}
+.userName {
+  width: 100%;
+  display: block;
+  transition: 0.3s ease all;
+}
 
-/* Sign In */
-.signInContainer{}
+
+/* Form Validation */
+.firstName:focus + .inputLabel {
+  transform: translateY(5px);
+}
+.firstName:valid + .inputLabel {
+  transform: translateY(5px);
+}
+.lastName:focus + .inputLabel {
+  transform: translateY(5px);
+}
+.lastName:valid + .inputLabel {
+  transform: translateY(5px);
+}
+.emailAddress:focus + .inputLabel {
+  transform: translateY(5px);
+}
+.emailAddress:valid + .inputLabel {
+  transform: translateY(5px);
+}
+.password:focus + .inputLabel {
+  transform: translateY(5px);
+}
+.password:valid + .inputLabel {
+  transform: translateY(5px);
+}
+.userName:focus + .inputLabel {
+  transform: translateY(5px);
+}
+.userName:valid + .inputLabel {
+  transform: translateY(5px);
+}
+
+.inputSectionSplit {
+  margin-bottom: 25px;
+  width: 45%;
+  display: inline-block;
+}
+/* Selection Box */
+/* https://www.sliderrevolution.com/resources/css-select-styles/ */
+select {
+
+  /* styling */
+  background-color: lightgrey;
+  border: thin solid plum;
+  border-radius: 4px;
+  display: inline-block;
+  line-height: 1.5em;
+  padding: 10px 40px 10px 40px;
+
+  /* reset */
+  margin: 0;      
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+
+
+
+
+
+
+
+

@@ -1,7 +1,8 @@
 /* 
-Insipired by https://codepen.io/ehermanson/pen/KwKWEv
-*/
+Insipired by https://codepen.io/craycraftdan/pen/ypxrNg
 
+*/
+import "./login.css";
 import React from "react";
 const { Component } = React;
 
@@ -58,7 +59,7 @@ class SignUp extends Component {
   render() {
     return(      
       <div className='signUpContainer'>
-        <h4 className='headerText'>Join Us Today</h4>
+        <h4 className='headerText'>GigFindr</h4>
         <div className='inputSectionSplit'>
           <input type='text' className='firstName' required/>
           <label className='inputLabel'>First Name</label>
@@ -77,7 +78,7 @@ class SignUp extends Component {
         </div>
         <div className="inputSection">
         <label for="userType">Choose a Membership Status:</label>
-        <select name="userType" id="userType">
+        <select name="userType" id="userType" className="sel-membership">
           <option value="non-musician">Non-Musician</option>
           <option value="musician">Musician</option>
           <option value="venue">Venue</option>
@@ -92,7 +93,7 @@ class SignIn extends Component {
   render() {
     return(
       <div className='signInContainer'>
-        <h4 className='headerText'>Welcome Back</h4>
+        <h4 className='headerText'>GigFindr</h4>
         <div className='inputSection'>
           <input type='text' className='userName' required/>
           <label className='inputLabel'>User Name</label>
@@ -109,5 +110,4 @@ class SignIn extends Component {
 
 export default function Post() {
   return (<App />);
-
 }
