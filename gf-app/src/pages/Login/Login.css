@@ -1,0 +1,27 @@
+/* Body */
+* {}
+body {}
+
+/* Form */
+.formContainer {}
+.formHeader {}
+.headerButton{}
+.formBody{}
+.formFooter {}
+.saveForm{}
+
+/* Form Specifics */
+.headerText{}
+.firstName{}
+.inputLabel{}
+.lastName{}
+.inputSection{}
+.emailAddress{}
+.password{}
+
+/* Sign Up */
+.signUpContainer{}
+.inputSectionSplit{}
+
+/* Sign In */
+.signInContainer{}
