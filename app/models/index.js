@@ -5,7 +5,7 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
   host: dbConfig.HOST,
   port: dbConfig.PORT,
   dialect: dbConfig.dialect,
-  operatorsAliases: false,
+  operatorsAliases: Sequelize.Op,
   connectTimeout: 60000,
 
   pool: {

@@ -1,8 +1,9 @@
 const db = require("../models");
+const userModels = require("../models/userModels");
 const Users = db.users;
 const Op = db.Sequelize.Op;
 
-// Create and Save a new Tutorial
+// Create and Save a new user
 exports.create = (req, res) => {
   
 };
@@ -11,8 +12,9 @@ exports.create = (req, res) => {
 exports.findAll = (req, res) => {
     const title = req.query.title;
     var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
-  
-    Users.findAll({ where: condition })
+
+    // SELECT id, userName FROM users
+    Users.findAll({attributes: ['id', 'userName']},{ where: condition })
       .then(data => {
         res.send(data);
       })
@@ -26,7 +28,25 @@ exports.findAll = (req, res) => {
 
 // Find a single Tutorial with an id
 exports.findOne = (req, res) => {
-  
+    const id = req.params.id;
+
+    // Select id, userName, firstName, lastName FROM users
+    Users.findByPk(id, {attributes: ["id", "userName", "firstName", "lastName"]})
+      .then(data => {
+        if (data) {
+         res.send(data);
+        } 
+        else {
+          res.status(404).send({
+            message: `Cannot find a user with id=${id}.`
+          });
+        }
+      })
+      .catch(err => {
+        res.status(500).send({
+          message: "Error retrieving a user with id=" + id
+       });
+      });
 };
 
 // Update a Tutorial by the id in the request

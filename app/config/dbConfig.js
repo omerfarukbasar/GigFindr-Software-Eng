@@ -1,9 +1,9 @@
 module.exports = {
-    HOST: "localhost",
+    HOST: "127.0.0.1",
     USER: "root",
-    PASSWORD: "9121",
+    PASSWORD: "", 
     DB: "GIGFINDR",
-    PORT: "8080",
+    PORT: "3306",
     dialect: "mysql",
 
     pool: {

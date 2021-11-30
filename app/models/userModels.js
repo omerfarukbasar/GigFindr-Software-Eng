@@ -28,8 +28,19 @@ module.exports = (sequelize, Sequelize) => {
           type: Sequelize.STRING
       },
       zip: {
-          type: Sequelize.STRING
-      }
+          type: Sequelize.INTEGER
+      },
+    }, {
+      // Configurations
+
+      // Don't add the timestamp attributes (updatedAt, createdAt)
+      timestamps: false,
+
+      // Remove createdAt
+      createdAt: false,
+
+      // Remove updatedAt
+      updatedAt: false,
     });
   
     return Users;
