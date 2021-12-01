@@ -59,7 +59,7 @@ class SignUp extends Component {
   render() {
     return(      
       <div className='signUpContainer'>
-        <h4 className='headerText'>GigFindr</h4>
+        <h1 className='headerText'>GigFindr</h1>
         <div className='inputSectionSplit'>
           <input type='text' className='firstName' required/>
           <label className='inputLabel'>First Name</label>
@@ -67,6 +67,10 @@ class SignUp extends Component {
         <div className='inputSectionSplit'>
           <input type='text' className='lastName' required/>
           <label className='inputLabel'>Last Name</label>
+        </div>
+        <div className='inputSection'>
+          <input type='text' className='userName' required/>
+          <label className='inputLabel'>User Name</label>
         </div>
         <div className='inputSection'>
           <input type='text' className='emailAddress' required/>
@@ -77,13 +81,13 @@ class SignUp extends Component {
           <label className='inputLabel'>Password</label>
         </div>
         <div className="inputSection">
-        <label for="userType">Choose a Membership Status:</label>
-        <select name="userType" id="userType" className="sel-membership">
-          <option value="non-musician">Non-Musician</option>
-          <option value="musician">Musician</option>
-          <option value="venue">Venue</option>
-        </select>
-        </div>
+        <span><label className='inputLabel' for="userType">Account Type:</label></span>
+          <select name="userType" id="userType" className="sel-membership">
+              <option value="non-musician">Non-Musician</option>
+              <option value="musician">Musician</option>
+              <option value="venue">Venue</option>
+            </select>
+          </div>
       </div>
     )
   }
@@ -93,7 +97,7 @@ class SignIn extends Component {
   render() {
     return(
       <div className='signInContainer'>
-        <h4 className='headerText'>GigFindr</h4>
+        <h1 className='headerText'>GigFindr</h1>
         <div className='inputSection'>
           <input type='text' className='userName' required/>
           <label className='inputLabel'>User Name</label>

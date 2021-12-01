@@ -192,14 +192,17 @@ input::placeholder {
 /* Selection Box */
 /* https://www.sliderrevolution.com/resources/css-select-styles/ */
 select {
-
   /* styling */
-  background-color: lightgrey;
-  border: thin solid plum;
-  border-radius: 4px;
+  background-color: transparent;
+  color: plum;
+  font-style: inherit;
+  font-size: medium;
+  border: none;
+  border-radius: 5px;
   display: inline-block;
   line-height: 1.5em;
-  padding: 10px 40px 10px 40px;
+  justify-content: right;
+  padding: 0 20px 0 20px;
 
   /* reset */
   margin: 0;      
@@ -210,6 +213,11 @@ select {
   -moz-appearance: none;
 }
 
+label[for=userType] {
+  display: inline;
+  border-bottom: 2px solid plum;
+  justify-content: left;
+}
 
 
 
