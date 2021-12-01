@@ -3,6 +3,26 @@ const userModels = require("../models/userModels");
 const Users = db.users;
 const Op = db.Sequelize.Op;
 
+
+// Validate a user
+exports.login = (req, res) => {
+  var userName = req.body.userName;
+  var pass = req.body.password;
+
+  if(userName == "Brenden" && pass == "Monteleone") 
+    res.send('Success!');
+  
+  else
+    res.send('Failed')
+}
+
+// Send login token
+exports.token = (req, res) => {
+  res.send({
+    token: 'tokin420'
+  });
+};
+
 // Create and Save a new user
 exports.create = (req, res) => {
   
@@ -15,18 +35,18 @@ exports.findAll = (req, res) => {
 
     // SELECT id, userName FROM users
     Users.findAll({attributes: ['id', 'userName']},{ where: condition })
-      .then(data => {
-        res.send(data);
-      })
-      .catch(err => {
-        res.status(500).send({
-          message:
-            err.message || "Some error occurred while retrieving users."
-        });
-      });
+    	.then(data => {
+        	res.send(data);
+    	})
+      	.catch(err => {
+        	res.status(500).send({
+          		message:
+            	err.message || "Some error occurred while retrieving users."
+        	});
+      	});
 };
 
-// Find a single Tutorial with an id
+// Find a single user with an id
 exports.findOne = (req, res) => {
     const id = req.params.id;
 
@@ -49,22 +69,17 @@ exports.findOne = (req, res) => {
       });
 };
 
-// Update a Tutorial by the id in the request
+// Update a user by the id in the request
 exports.update = (req, res) => {
   
 };
 
-// Delete a Tutorial with the specified id in the request
+// Delete a user with the specified id in the request
 exports.delete = (req, res) => {
   
 };
 
-// Delete all Tutorials from the database.
-exports.deleteAll = (req, res) => {
-  
-};
-
-// Find all published Tutorials
-exports.findAllPublished = (req, res) => {
+// Remove a single user from the database.
+exports.remove = (req, res) => {
   
 };
