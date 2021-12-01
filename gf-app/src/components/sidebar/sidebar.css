@@ -1,0 +1,113 @@
+.sidebar {
+  flex: 3;
+  height: calc(100vh - 50px);
+  overflow-y: scroll;
+  position: sticky;
+  top: 50px;
+}
+
+::-webkit-scrollbar{
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+background-color: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+background-color: lightgray;
+}
+
+.sidebarWrapper {
+  padding: 20px;
+  /*background-color: greenyellow;*/
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
+}
+
+.card-img {
+  width: 100%;
+}
+
+.title {
+  color: grey;
+  font-size: 18px;
+}
+
+button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 10px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+a {
+  text-decoration: none;
+  font-size: 22px;
+  color: black;
+}
+
+button:hover, a:hover {
+  opacity: 0.7;
+}
+
+
+.sidebarHR {
+  margin: 20px 0;
+}
+
+.friendsListDiv {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.Friend {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.sidebarTitle {
+  margin-bottom: 20px;
+}
+
+.sidebarProfileImgContainer {
+  margin-right: 10px;
+  position: relative;
+}
+
+.sidebarOnline {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: limegreen;
+  position: absolute;
+  top: -1px;
+  right: 0;
+  left: 22px;
+  border: 2px solid white;
+}
+
+.sidebarUsername {
+  font-weight: 100;
+}
+
+.friendsImg {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+}
