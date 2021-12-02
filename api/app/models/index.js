@@ -7,6 +7,7 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
   dialect: dbConfig.dialect,
   operatorsAliases: Sequelize.Op,
   connectTimeout: 60000,
+  //logging: false,     // Disables console.log
 
   pool: {
     max: dbConfig.pool.max,

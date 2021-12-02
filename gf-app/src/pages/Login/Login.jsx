@@ -86,7 +86,12 @@ class SignUp extends Component {
   // Form Submit button
   submit() {
     // Ensure everything was entered
-    alert('First Name: ' + this.state.firstName + '\nLast Name: ' + this.state.lastName + '\nEmail: ' + this.state.emailAddress + '\nPassword: ' + this.state.password + '\nUser Type: ' + this.state.userType);
+    if( (this.state.firstName == '') || (this.state.lastName == '') || (this.state.emailAddress == '') || (this.state.password == '') )
+      alert('Enter all the fields!');
+    else {
+      alert('First Name: ' + this.state.firstName + '\nLast Name: ' + this.state.lastName + '\nEmail: ' + this.state.emailAddress + '\nPassword: ' + this.state.password + '\nUser Type: ' + this.state.userType);
+      // Figure out how to send data to the API
+    }
   }
 
   render() {
@@ -150,25 +155,46 @@ class SignIn extends Component {
     this.setState({password: e.target.value})
   }
 
-handleChange = (e) => {
-  this.setState({...this.data, [e.data.target]: e.data.value})
-}
-
   // Form Submit button
-  submit(cred) {
+  submit() {
     // Ensure everything was entered
-    alert('Username: ' + this.state.userName + '\nPassword: ' + this.state.password);
-    /*
-    fetch('http://localhost:8443/api/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(cred)
-    })
-      .then(data => data.json()
-      )
-    */
+    if( (this.state.userName == null) || (this.state.password == null) )
+      alert('Enter all fields!');
+    else {
+      // Create a json object to send to API
+      var cred = {username: this.state.userName, password: this.state.password};
+    
+      // Send data to the API to validate user 
+      fetch('http://localhost:8443/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(cred)
+      })
+        .then(response => response.json()) // was .json()
+        .then(data => {
+          console.log(data)
+
+          // No user was found, send message
+          if(data.firstName == null)
+            alert('User does not exist!')
+
+          // User was found   TODO: Set session variables(?), re-route user to homepage
+          else
+            alert('Welcome ' + data.firstName + ", you will eventually be re-routed.")
+
+        })
+
+        .catch((error) => {
+          console.error('Error:', error);
+        })
+     /*
+      fetch('http://localhost:8443/api/users/')
+        .then(response => response.json())
+        .then(data => console.log(data));
+      */
+    }
   }
 
   render() {

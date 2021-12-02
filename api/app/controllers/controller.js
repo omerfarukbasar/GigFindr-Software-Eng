@@ -1,3 +1,4 @@
+const { json } = require("sequelize/dist");
 const db = require("../models");
 const userModels = require("../models/userModels");
 const Users = db.users;
@@ -6,14 +7,45 @@ const Op = db.Sequelize.Op;
 
 // Validate a user
 exports.login = (req, res) => {
-  var userName = req.body.userName;
-  var pass = req.body.password;
+  try {
+    // Collect the username and password from the form
+    var jsonObj = req.body; 
+    var userName = jsonObj.username;
+    var pass = jsonObj.password;
+    //res.send("Username: " + userName + "; Password: " + pass);
 
-  if(userName == "Brenden" && pass == "Monteleone") 
-    res.send('Success!');
-  
-  else
-    res.send('Failed')
+    // Validate if user's in the database (SELECT id, firstName FROM USERS WHERE username = 'userName' AND password = 'pass')
+    Users.findOne({
+        where: {
+          [Op.and]: [
+            {username: userName}, 
+            {password: pass}
+          ]
+        }, 
+          attributes: ['id', 'firstName']
+      }
+    )
+      .then(data => {
+        if(data) {
+          // Send results back to front-end
+          res.send(data);
+        }
+        else {
+          res.status(404).send({
+            message: `Cannot find user with the username=${userName}.`
+          })
+        }
+      })
+      .catch(err => {
+        res.status(500).send({
+          message: "Error retrieving a user with the username=" + userName
+        })
+      })
+
+  }
+  catch(e) {
+    res.send(e)
+  }
 }
 
 // Send login token
@@ -29,6 +61,7 @@ exports.create = (req, res) => {
 };
 
 // Retrieve all users from the database.
+
 exports.findAll = (req, res) => {
     const title = req.query.title;
     var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
@@ -38,19 +71,20 @@ exports.findAll = (req, res) => {
     	.then(data => {
         	res.send(data);
     	})
-      	.catch(err => {
-        	res.status(500).send({
-          		message:
-            	err.message || "Some error occurred while retrieving users."
-        	});
-      	});
+
+      .catch(err => {
+        res.status(500).send({
+            message:
+            err.message || "Some error occurred while retrieving users."
+        });
+      });
 };
 
 // Find a single user with an id
 exports.findOne = (req, res) => {
     const id = req.params.id;
 
-    // Select id, userName, firstName, lastName FROM users
+    // Select id, userName, firstName, lastName FROM users WHERE userID = id
     Users.findByPk(id, {attributes: ["id", "userName", "firstName", "lastName"]})
       .then(data => {
         if (data) {
