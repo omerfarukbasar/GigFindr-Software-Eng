@@ -2,7 +2,7 @@
 Insipired by https://codepen.io/craycraftdan/pen/ypxrNg
 
 */
-import "./login.css";
+import "./Login.css";
 import React from "react";
 const { Component } = React;
 
