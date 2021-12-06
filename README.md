@@ -24,6 +24,7 @@ If no link was provided above, then one should:
 - Enter terminal/cmd/powershell and change directory to the application folder (e.g., gf-app)
 - Run `npm start` to run the application on a local host
 
+monteleone-api
 ### How to run api:
 ---
 
@@ -38,6 +39,7 @@ If no link was provided above, then one should:
 > Run `npm start` in project root directory on terminal
 > 
 > Navigate to http://localhost/8443 on your web browser
+
 <hr>
 
 ### Project: Diagrams and Models
