@@ -159,7 +159,7 @@ class SignUp extends Component {
   }
 }
 
-// EDITED
+
 class SignIn extends Component {
   constructor(props) {
     super(props)
@@ -206,13 +206,13 @@ class SignIn extends Component {
         .then(response => response.json()) // was .json()
         .then(data => {
           // Debug
-          console.log(data)
+          //console.log(data)
 
           // No user was found, send message
           if(data.firstName == null)
             alert('User does not exist!')
 
-          // User was found   TODO: Set session variables(?), re-route user to homepage
+          // User was found   TODO: Set session variable to hold ID, re-route user to homepage
           else
             alert('Welcome ' + data.firstName + ", you will eventually be re-routed.")
 
@@ -235,7 +235,7 @@ class SignIn extends Component {
               <label className='inputLabel'>User Name</label>
             </div>
             <div className='inputSection'>
-              <input onChange={this.handlePasswordChange} type='text' className='password' required/>
+              <input onChange={this.handlePasswordChange} type='password' className='password' required/>
               <label className='inputLabel'>Password</label>
             </div>
 
@@ -249,7 +249,8 @@ class SignIn extends Component {
   }
 }
 
-export default function Post() {
+
+export default function Posts() {
   return (<App />);
 
 }

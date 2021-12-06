@@ -30,6 +30,8 @@ require("./app/routes/userRoute.js")(app);
 
 require("./app/routes/loginRoute.js")(app);
 
+require("./app/routes/postRoute.js")(app);
+
 // set port, listen for requests
 const PORT = process.env.PORT || 8443;
 app.listen(PORT, () => {
