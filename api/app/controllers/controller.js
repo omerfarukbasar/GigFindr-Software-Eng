@@ -57,11 +57,67 @@ exports.token = (req, res) => {
 
 // Create and Save a new user
 exports.create = (req, res) => {
-  
+  // Validate request
+  if (!req.body) {
+    res.status(400).send({
+      message: "Content can not be empty!"
+    });
+    return;
+  }
+
+  // Check if a user exists with that userName
+  Users.findOne({
+    where: {
+      [Op.or]: [
+        {username: req.body.userName}
+      ]
+    }, 
+      attributes: ['id']
+  })
+    .then(data => {
+      if(data) {
+        // Send messgae back to front-end
+        res.send({message: "That username is already taken!"});
+      }
+      else {
+        // Create the user
+        const user = {
+          username: req.body.userName,
+          password: req.body.password,
+          profilePic: null,
+          firstName: req.body.firstName,
+          lastName: req.body.lastName,
+          type: req.body.userType,
+          address: "",
+          city: "",
+          state: "",
+          zip: 00000
+        };
+
+        // Save user to db
+        Users.create(user)
+        .then(data => {
+          // Send confirmation message
+          res.send({message: "Account Created! Login to continue."});
+        })
+        .catch(err => {
+          res.status(500).send({
+            message:
+              err.message || "Some error occurred while creating the Tutorial."
+          });
+        });
+
+      }//end else
+
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Error retrieving a user with the username=" + userName
+      })
+    })
 };
 
-// Retrieve all users from the database.
-
+// Retrieve all users from the database
 exports.findAll = (req, res) => {
     const title = req.query.title;
     var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;

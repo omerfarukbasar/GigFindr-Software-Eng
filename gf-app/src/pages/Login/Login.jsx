@@ -54,14 +54,16 @@ class SignUp extends Component {
     super(props)
     this.handleFNChange = this.handleFNChange.bind(this);
     this.handleLNChange = this.handleLNChange.bind(this);
+    this.handleUNChange = this.handleUNChange.bind(this);
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handleUserTypeChange = this.handleUserTypeChange.bind(this);
     this.state = {
-      firstName: '',
-      lastName: '',
-      emailAddress: '',
-      password: '',
+      firstName: null,
+      lastName: null,
+      userName: null,
+      emailAddress: null,
+      password: null,
       userType: 'non-musician', // Initial value
     };
   }
@@ -72,6 +74,9 @@ class SignUp extends Component {
   }
   handleLNChange(e) {
     this.setState({lastName: e.target.value})
+  }
+  handleUNChange(e) {
+    this.setState({userName: e.target.value})
   }
   handleEmailChange(e) {
     this.setState({emailAddress: e.target.value})
@@ -86,46 +91,66 @@ class SignUp extends Component {
   // Form Submit button
   submit() {
     // Ensure everything was entered
-    if( (this.state.firstName == '') || (this.state.lastName == '') || (this.state.emailAddress == '') || (this.state.password == '') )
+    if( (this.state.firstName == null) || (this.state.lastName == null) || (this.state.userName == null) || (this.state.emailAddress == null) || (this.state.password == null) )
       alert('Enter all the fields!');
     else {
-      alert('First Name: ' + this.state.firstName + '\nLast Name: ' + this.state.lastName + '\nEmail: ' + this.state.emailAddress + '\nPassword: ' + this.state.password + '\nUser Type: ' + this.state.userType);
-      // Figure out how to send data to the API
+      // Send data to the API
+      var cred = {firstName: this.state.firstName, lastName: this.state.lastName, userName: this.state.userName, email: this.state.emailAddress, password: this.state.password, userType: this.state.userType}
+
+      fetch('http://localhost:8443/api/users/create', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(cred)
+      })
+        .then(response => response.json()) // was .json()
+        .then(data => {
+          // Display response message to user
+          alert(data.message);
+
+          // Check if account was made and reroute user to home?
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        })
     }
   }
 
   render() {
     return(
       <div>
-        <div className='formBody'>
-          <div className='signUpContainer'>
-            <h4 className='headerText'>Join Us Today</h4>
-            <div className='inputSectionSplit'>
-              <input onChange={this.handleFNChange} type='text' className='firstName' required/>
-              <label className='inputLabel'>First Name</label>
-            </div>
-            <div className='inputSectionSplit'>
-              <input onChange={this.handleLNChange} type='text' className='lastName' required/>
-              <label className='inputLabel'>Last Name</label>
-            </div>
-            <div className='inputSection'>
-              <input onChange={this.handleEmailChange} type='text' className='emailAddress' required/>
-              <label className='inputLabel'>Email Address</label>
-            </div>
-            <div className='inputSection'>
-              <input onChange={this.handlePasswordChange} type='password' className='password' required/>
-              <label className='inputLabel'>Password</label>
-            </div>
-            <div className="inputSection">
-            <label for="userType">Choose a Membership Status:</label>
-            <select onChange={this.handleUserTypeChange} name="userType" id="userType">
+        <div className='signUpContainer'>
+        <h1 className='headerText'>GigFindr</h1>
+        <div className='inputSectionSplit'>
+          <input onChange={this.handleFNChange} type='text' className='firstName' required/>
+          <label className='inputLabel'>First Name</label>
+        </div>
+        <div className='inputSectionSplit'>
+          <input onChange={this.handleLNChange} type='text' className='lastName' required/>
+          <label className='inputLabel'>Last Name</label>
+        </div>
+        <div className='inputSection'>
+          <input onChange={this.handleUNChange} type='text' className='userName' required/>
+          <label className='inputLabel'>User Name</label>
+        </div>
+        <div className='inputSection'>
+          <input onChange={this.handleEmailChange} type='text' className='emailAddress' required/>
+          <label className='inputLabel'>Email Address</label>
+        </div>
+        <div className='inputSection'>
+          <input onChange={this.handlePasswordChange} type='password' className='password' required/>
+          <label className='inputLabel'>Password</label>
+        </div>
+        <div className="inputSection">
+        <span><label className='inputLabel' for="userType">Account Type:</label></span>
+          <select onChange={this.handleUserTypeChange} name="userType" id="userType" className="sel-membership">
               <option value="non-musician">Non-Musician</option>
               <option value="musician">Musician</option>
               <option value="venue">Venue</option>
             </select>
-            </div>
           </div>
-        </div>
+      </div>
         <div className='formFooter'>
           <button onClick={this.submit.bind(this)} className='saveForm'>Submit</button>
         </div>
@@ -149,10 +174,16 @@ class SignIn extends Component {
 
   // Change handles
   handleUserNameChange(e) {
-    this.setState({userName: e.target.value})
+    if(e.target.value != "")
+      this.setState({userName: e.target.value})
+    else
+      this.setState({userName: null})
   }
   handlePasswordChange(e) {
-    this.setState({password: e.target.value})
+    if(e.target.value != "")
+      this.setState({password: e.target.value})
+    else
+      this.setState({password: null})
   }
 
   // Form Submit button
@@ -163,7 +194,7 @@ class SignIn extends Component {
     else {
       // Create a json object to send to API
       var cred = {username: this.state.userName, password: this.state.password};
-    
+      
       // Send data to the API to validate user 
       fetch('http://localhost:8443/api/login', {
         method: 'POST',
@@ -174,6 +205,7 @@ class SignIn extends Component {
       })
         .then(response => response.json()) // was .json()
         .then(data => {
+          // Debug
           console.log(data)
 
           // No user was found, send message
@@ -189,11 +221,6 @@ class SignIn extends Component {
         .catch((error) => {
           console.error('Error:', error);
         })
-     /*
-      fetch('http://localhost:8443/api/users/')
-        .then(response => response.json())
-        .then(data => console.log(data));
-      */
     }
   }
 
