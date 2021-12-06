@@ -1,9 +1,15 @@
 import { MoreVert } from "@material-ui/icons"
 import "./post.css"
 import { Users } from "../../fabricatedData";
+import { useState } from "react";
 
 export default function Post({post}) {
-{/*console.log(post)*/}
+  const [like, setLike] = useState(post.like)
+  const [isliked, setisLiked] = useState(false)
+  const likeHandler =()=> {
+    setLike(isliked ? like-1 : like+1)
+    setisLiked(!isliked)
+  }
   return (
     <div className="post">
       <div className="postWrapper">
@@ -19,13 +25,12 @@ export default function Post({post}) {
         </div>
         <div className="postCenter">
           <span className="postText">{post?.desc}</span>
-          {/* change post type using iframe and conditional rendering, stays as img for now*/}
           <img className="postImg" src={post.photo} alt="violin"/>
         </div>
         <div className="postBottom">
           <div className="postBottomLeft">
-            <img className="postLikeImg" src="assets/like.png" alt="like icon"/>
-            <span className="postLikeCount">{post?.like}</span>
+            <img className="postLikeImg" src="assets/like.png" alt="like icon" onClick={likeHandler}/>
+            <span className="postLikeCount">{like}</span>
           </div>
           <div className="postBottomRight">
             <span className="postCommentText">{post?.comment} comments</span>

@@ -12,53 +12,6 @@
   list-style: none;
 }
 
-.suggestion {
-  display: flex;
-  align-items: center;
-  margin-bottom: 15px;
-}
-
 .rightbarTitle {
   margin-bottom: 20px;
-}
-
-.rightbarProfileImgContainer {
-  margin-right: 10px;
-  position: relative;
-}
-
-.rightbarOnline {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background-color: limegreen;
-  position: absolute;
-  top: -1px;
-  right: 0;
-  left: 22px;
-  border: 2px solid white;
-}
-
-.rightbarUsername {
-  font-weight: 100;
-}
-
-.suggestionImg {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-right: 10px;
-}
-
-.followButton {
-  border: none;
-  width: 15%;
-  padding: 7px;
-  border-radius: 10px;
-  background-color: plum;
-  font-size: 10px;
-  margin: 10px;
-  cursor: pointer;
-  color: white;
 }

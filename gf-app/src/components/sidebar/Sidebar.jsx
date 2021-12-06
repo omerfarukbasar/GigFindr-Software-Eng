@@ -1,4 +1,6 @@
 import "./sidebar.css";
+import { Users } from "../../fabricatedData";
+import Online from "../online/Online";
 
 export default function Sidebar() {
   return (
@@ -16,69 +18,7 @@ export default function Sidebar() {
           <hr className="sidebarHR" />
           <h4 className="sidebarTitle">Online Friends</h4>
           <ul className="friendsList">
-            <li className="Friend">
-              <div className="sidebarProfileImgContainer">
-                <img src="/assets/john-doe.jpg" alt="friend img" className="friendsImg"/>
-                <span className="sidebarOnline"></span>
-              </div>
-              <span className="sidebarUsername">John Doe</span>
-            </li>
-
-            <li className="Friend">
-              <div className="sidebarProfileImgContainer">
-                <img src="/assets/john-doe.jpg" alt="friend img" className="friendsImg"/>
-                <span className="sidebarOnline"></span>
-              </div>
-              <span className="sidebarUsername">John Doe</span>
-            </li>
-            
-            <li className="Friend">
-              <div className="sidebarProfileImgContainer">
-                <img src="/assets/john-doe.jpg" alt="friend img" className="friendsImg"/>
-                <span className="sidebarOnline"></span>
-              </div>
-              <span className="sidebarUsername">John Doe</span>
-            </li>
-            
-            <li className="Friend">
-              <div className="sidebarProfileImgContainer">
-                <img src="/assets/john-doe.jpg" alt="friend img" className="friendsImg"/>
-                <span className="sidebarOnline"></span>
-              </div>
-              <span className="sidebarUsername">John Doe</span>
-            </li>
-            
-            <li className="Friend">
-              <div className="sidebarProfileImgContainer">
-                <img src="/assets/john-doe.jpg" alt="friend img" className="friendsImg"/>
-                <span className="sidebarOnline"></span>
-              </div>
-              <span className="sidebarUsername">John Doe</span>
-            </li>
-           
-            <li className="Friend">
-              <div className="sidebarProfileImgContainer">
-                <img src="/assets/john-doe.jpg" alt="friend img" className="friendsImg"/>
-                <span className="sidebarOnline"></span>
-              </div>
-              <span className="sidebarUsername">John Doe</span>
-            </li>
-           
-            <li className="Friend">
-              <div className="sidebarProfileImgContainer">
-                <img src="/assets/john-doe.jpg" alt="friend img" className="friendsImg"/>
-                <span className="sidebarOnline"></span>
-              </div>
-              <span className="sidebarUsername">John Doe</span>
-            </li>
-           
-            <li className="Friend">
-              <div className="sidebarProfileImgContainer">
-                <img src="/assets/john-doe.jpg" alt="friend img" className="friendsImg"/>
-                <span className="sidebarOnline"></span>
-              </div>
-              <span className="sidebarUsername">John Doe</span>
-            </li>
+            {Users.map(u => (<Online key={u.id} user={u} />))}
           </ul>
           
         </div>

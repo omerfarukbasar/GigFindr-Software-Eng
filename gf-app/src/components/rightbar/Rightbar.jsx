@@ -1,4 +1,6 @@
 import "./rightbar.css"
+import Suggested from "../suggested/Suggested";
+import { Users } from "../../fabricatedData";
 
 export default function Rightbar() {
   return (
@@ -9,50 +11,7 @@ export default function Rightbar() {
           <h4 className="rightbarTitle">Suggested Accounts</h4>
           
           <ul className="rightbarSuggestionList">
-            <li className="suggestion">
-              <div className="rightbarProfileImgContainer">
-                <img src="/assets/john-doe.jpg" alt="suggestion img" className="suggestionImg"/>
-                <span className="rightbarOnline"></span>
-              </div>
-              <span className="rightbarUsername">John Doe</span>
-              <button className="followButton">+ Follow</button>
-            </li>
-           
-            <li className="suggestion">
-              <div className="rightbarProfileImgContainer">
-                <img src="/assets/john-doe.jpg" alt="suggestion img" className="suggestionImg"/>
-                <span className="rightbarOnline"></span>
-              </div>
-              <span className="rightbarUsername">John Doe</span>
-              <button className="followButton">+ Follow</button>
-            </li>
-            
-            <li className="suggestion">
-              <div className="rightbarProfileImgContainer">
-                <img src="/assets/john-doe.jpg" alt="suggestion img" className="suggestionImg"/>
-                <span className="rightbarOnline"></span>
-              </div>
-              <span className="rightbarUsername">John Doe</span>
-              <button className="followButton">+ Follow</button>
-            </li>
-            
-            <li className="suggestion">
-              <div className="rightbarProfileImgContainer">
-                <img src="/assets/john-doe.jpg" alt="suggestion img" className="suggestionImg"/>
-                <span className="rightbarOnline"></span>
-              </div>
-              <span className="rightbarUsername">John Doe</span>
-              <button className="followButton">+ Follow</button>
-            </li>
-           
-            <li className="suggestion">
-              <div className="rightbarProfileImgContainer">
-                <img src="/assets/john-doe.jpg" alt="suggestion img" className="suggestionImg"/>
-                <span className="rightbarOnline"></span>
-              </div>
-              <span className="rightbarUsername">John Doe</span>
-              <button className="followButton">+ Follow</button>
-            </li>
+          {Users.map(u => (<Suggested key={u.id} user={u} />))}
           </ul>
 
         </div>
