@@ -24,7 +24,6 @@ If no link was provided above, then one should:
 - Enter terminal/cmd/powershell and change directory to the application folder (e.g., gf-app)
 - Run `npm start` to run the application on a local host
 
-monteleone-api
 ### How to run api:
 ---
 
