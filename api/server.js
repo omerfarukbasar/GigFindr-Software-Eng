@@ -22,7 +22,7 @@ db.sequelize.sync();
 
 // Base Route
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to monteleone application." });
+  res.json({ message: "Welcome to GigFindr's API, developed by Brenden Monteleone." });
 });
 
 // Other routes

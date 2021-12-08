@@ -12,5 +12,8 @@ module.exports = app => {
     // Create a user
     router.post("/create", users.create);
 
+    // Get friend list based on user ID
+    router.get("/getFriends/:id", users.findFriends);
+
     app.use('/api/users', router);
 };

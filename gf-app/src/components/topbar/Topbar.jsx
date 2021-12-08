@@ -1,6 +1,8 @@
 import "./topbar.css"
 import { Search, Person, Chat, Notifications } from "@material-ui/icons"
 
+// Added a simple logout feature for debugging 
+//  by clicking the profile image in top right
 export default function Topbar() {
   return (
     <div className="topbarContainer">
@@ -38,7 +40,7 @@ export default function Topbar() {
             <span className="topbarIconBadge">1</span>
           </div>
         </div>
-        <img src="/assets/test-musician.png" alt="Man" className="topbarProfile" />
+        <img src="/assets/test-musician.png" alt="Man" className="topbarProfile" /*onClick={localStorage.removeItem("ID"), window.location="/Login"}*//>
       </div>
     </div>
   );
