@@ -13,7 +13,7 @@ function App() {
         <Route path="/Home"/>
       </Home>
     );
-    
+
   // Route users not logged in to sign-in page
   else
     return (
@@ -21,18 +21,6 @@ function App() {
         <Route path='/Login'/>
       </Login>
     );
-/*
-  return (
-    <Login>
-
-    </Login>,
-    <Home>
-      
-    </Home>
-
-    
-    );
-*/
 }
 
 export default App;
