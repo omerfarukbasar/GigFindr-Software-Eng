@@ -15,5 +15,8 @@ module.exports = app => {
     // Get friend list based on user ID
     router.get("/getFriends/:id", users.findFriends);
 
+    // Get people who aren't friends with the user
+    router.get("/getPeople/:id/:type", users.getPeople);
+
     app.use('/api/users', router);
 };

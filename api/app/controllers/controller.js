@@ -201,6 +201,48 @@ exports.findFriends = (req, res) => {
     });
 }
 
+// Retrieve people who aren't friends with user (Update)
+exports.getPeople = (req, res) => {
+  // Gather data from url
+  const userID = req.params.id;
+  const type = req.params.type;
+  
+  // SELECT DISTINCT firstName, lastNam FROM users WHERE users.id != :id 
+  //  AND users.id NOT IN (
+  //    SELECT user.id FROM users join followingRelationship
+  //    WHERE followingRelationship.followerID = users.id
+  //    AND followingRelationship.userID = 2
+  //  );
+  Users.findAll({
+    attributes: [
+      [Sequelize.fn('DISTINCT', Sequelize.col('firstName')) ,'firstName'],
+      'lastName'
+    ],
+    distinct: true,
+    where: {
+      [Op.and]: [
+        {id: {[Op.not]: userID}},
+        {id: {
+          [Op.notIn]: sequelize.literal(
+            '(SELECT users.id FROM users JOIN followingRelationship ' +
+            ' WHERE followingRelationship.followerID = users.id ' +
+            ' AND followingRelationship.userID = ' + userID + 
+            ')'
+          )
+        }
+      }]
+    },
+  })
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send(
+        err
+      );
+    });
+}
+
 // Update a user by id 
 exports.update = (req, res) => {
   
