@@ -2,8 +2,12 @@
 Insipired by https://codepen.io/ehermanson/pen/KwKWEv
 */
 
+import Home from "../Home/Home";
 import React from "react";
-import "./Login.css"
+import { Redirect } from "react-router-dom";
+import "./Login.css";
+import "../../components/userProfile";
+import UserProfile from "../../components/userProfile";
 const { Component } = React;
 
 class App extends Component {
@@ -109,6 +113,10 @@ class SignUp extends Component {
           // Display response message to user
           alert(data.message);
 
+          // Route user to home
+          window.location = "/Login";
+          
+
           // Check if account was made and reroute user to home?
         })
         .catch((error) => {
@@ -205,17 +213,21 @@ class SignIn extends Component {
       })
         .then(response => response.json()) // was .json()
         .then(data => {
-          // Debug
-          //console.log(data)
-
           // No user was found, send message
           if(data.firstName == null)
             alert('User does not exist!')
 
-          // User was found   TODO: Set session variable to hold ID, re-route user to homepage
-          else
-            alert('Welcome ' + data.firstName + ", you will eventually be re-routed.")
+          // User was found   TODO: Reroute user to homepage
+          else {
+            //alert('Welcome ' + data.firstName + ", you will eventually be re-routed.")
+            
+            // Set cookie ID
+            localStorage.setItem("ID", data.id);
+            UserProfile.setID(data.id);
 
+            // Route user to home
+            window.location = "/Home";
+          }
         })
 
         .catch((error) => {

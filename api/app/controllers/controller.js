@@ -1,9 +1,11 @@
-const { json } = require("sequelize/dist");
+const { json, QueryTypes } = require("sequelize/dist");
 const db = require("../models");
 const userModels = require("../models/userModels");
 const postModels = require("../models/postModels");
+const { sequelize, users, Sequelize } = require("../models");
 const Users = db.users;
 const Posts = db.posts;
+const FR = db.followingRelationship;
 const Op = db.Sequelize.Op;
 
 // ==== USER STUFF ====//
@@ -144,7 +146,7 @@ exports.findOne = (req, res) => {
     const id = req.params.id;
 
     // Select id, userName, firstName, lastName FROM users WHERE userID = id
-    Users.findByPk(id, {attributes: ["id", "userName", "firstName", "lastName"]})
+    Users.findByPk(id, {attributes: ["id", "userName", "firstName", "lastName", "type", "profilePic"]})
       .then(data => {
         if (data) {
          res.send(data);
@@ -161,6 +163,85 @@ exports.findOne = (req, res) => {
        });
       });
 };
+
+// Find the friends of a specific user
+exports.findFriends = (req, res) => {
+  const theID = req.params.id;
+
+  // SELECT firstName, lastName FROM users INNER JOIN followingRelationship
+  //  WHERE followingRelationship.followerID = users.userID
+  //  AND followingRelationship.uesrID = :id;
+  Users.findAll({
+    attributes: ['firstName', 'lastName'],
+    include: [{
+      model: FR,
+      attributes: [],
+      on: {
+        followerID: sequelize.where(sequelize.col("users.id"), "=", sequelize.col("followingRelationships.followerID")),
+      },
+      where: {
+        userID: theID
+      }
+    }],
+  })
+    .then(data => {
+      if (data) {
+        res.send(data);
+      } 
+      else {
+        res.status(404).send({
+          message: `Cannot find a user with id=${theID}.`
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).send(
+        err
+      );
+    });
+}
+
+// Retrieve people who aren't friends with user (Update)
+exports.getPeople = (req, res) => {
+  // Gather data from url
+  const userID = req.params.id;
+  const type = req.params.type;
+  
+  // SELECT DISTINCT firstName, lastNam FROM users WHERE users.id != :id 
+  //  AND users.id NOT IN (
+  //    SELECT user.id FROM users join followingRelationship
+  //    WHERE followingRelationship.followerID = users.id
+  //    AND followingRelationship.userID = 2
+  //  );
+  Users.findAll({
+    attributes: [
+      [Sequelize.fn('DISTINCT', Sequelize.col('firstName')) ,'firstName'],
+      'lastName'
+    ],
+    distinct: true,
+    where: {
+      [Op.and]: [
+        {id: {[Op.not]: userID}},
+        {id: {
+          [Op.notIn]: sequelize.literal(
+            '(SELECT users.id FROM users JOIN followingRelationship ' +
+            ' WHERE followingRelationship.followerID = users.id ' +
+            ' AND followingRelationship.userID = ' + userID + 
+            ')'
+          )
+        }
+      }]
+    },
+  })
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send(
+        err
+      );
+    });
+}
 
 // Update a user by id 
 exports.update = (req, res) => {
