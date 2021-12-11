@@ -4,10 +4,10 @@ export default function Sidebar() {
   // https://gomakethings.com/waiting-for-multiple-all-api-responses-to-complete-with-the-vanilla-js-promise.all-method/
   Promise.all([
     fetch('http://localhost:8443/api/users/'+localStorage.getItem("ID"), {
-    method: 'GET',
-    headers: {
+      method: 'GET',
+      headers: {
       'Content-Type': 'application/json'
-    }
+      }
     }),
     fetch('http://localhost:8443/api/users/getFriends/'+localStorage.getItem("ID"), {
       method: 'GET',

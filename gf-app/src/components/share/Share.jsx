@@ -22,7 +22,7 @@ class App extends Component {
   submit() {
     //alert('Post will be posted soon enough!\nInput: '+this.state.postContent);
     // Create data to send to API
-    var cred = {postContent: this.state.postContent};
+    var cred = {content: this.state.postContent, id: localStorage.getItem("ID")};
 
     // Send to the API
     fetch('http://localhost:8443/api/posts/create', {
@@ -35,8 +35,13 @@ class App extends Component {
       .then(response => response.json()) // was .json()
       .then(data => {
         // Debug
-        //console.log(data);
-        alert(data.message);
+        console.log(data);
+        
+        // Check message
+        if(!data.sent)
+          alert('You must enter something to post!');
+        else
+          window.location.reload();
       })
       .catch((error) => {
         console.error('Error:', error);
@@ -89,5 +94,5 @@ class App extends Component {
 }
 
 export default function Share() {
-  return(<App />)
+  return(<App />);
 }

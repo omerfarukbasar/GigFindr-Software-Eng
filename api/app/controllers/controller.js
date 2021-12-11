@@ -6,6 +6,7 @@ const { sequelize, users, Sequelize } = require("../models");
 const Users = db.users;
 const Posts = db.posts;
 const FR = db.followingRelationship;
+const PF = db.postFavorites;
 const Op = db.Sequelize.Op;
 
 // ==== USER STUFF ====//
@@ -255,8 +256,11 @@ exports.delete = (req, res) => {
 
 // ==== POST STUFF ====//
 
-// Create a new post
+// Create a new post <= Update eventually
 exports.newPost = (req, res) => {
+  var postContent = req.body;
+  var post = null;
+
   // Validate request
   if (!req.body) {
     res.status(400).send({
@@ -267,21 +271,177 @@ exports.newPost = (req, res) => {
 
   // Determine what to post (pic, audio, text, etc.)
   // Text only <= add more conditions
-  if(req.body.postContent != null && req.body.postContent != "") {
+  if(postContent.content != null && postContent.content != "") {
+    // Get the date
+    let today = new Date();
+    let dd = String(today.getDate()).padStart(2, '0');
+    let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    let yyyy = today.getFullYear();
+
+    var date = yyyy + '/' + mm + '/' + dd;
+
     // Create the post
-    res.send({message: "Post will be posted soon enough!\nInput: " + req.body.postContent});
+    post = {
+      title: null,
+      content: postContent.content,
+      audio: null,
+      postDate: date,
+      userID: postContent.id
+    }
+
   }
   else {
-    res.send({message: "You must enter something to post!"});
+    res.send({sent: false});
   }
+
+  // Save post to the database
+  Posts.create(post)
+  .then(data => {
+    // Send confirmation message
+    res.send({sent: true});
+  })
+  .catch(err => {
+    res.status(500).send(/*{sent: false}*/{
+      message:
+        err.message || "Some error occurred while creating the Tutorial."
+        
+    });
+  });
+
 }
 
-// Retrieve all posts (for feed?)
+// Retrieve all posts (Friends vs. Strangers) <= Complete the stranger part
 exports.getAllPosts = (req, res) => {
-  res.send({message: "In Progress.."});
+  var postType = req.params.type;
+  var userID = req.params.id;
+
+  // Find posts based on type given
+  if(postType == "friends"){
+    // SELECT users.firstName, users.lastName, users.profilePic, posts.postDate, posts.content, posts.image, posts.audio, posts.id
+    // FROM users INNER JOIN posts
+    // WHERE users.id = posts.userID
+    // AND posts.userID = 2
+    // AND posts.userID IN (
+    //    SELECT users.id FROM users join followingRelationship
+    //    WHERE followingRelationship.followerID = users.id
+    //    AND followingRelationship.userID = 2
+    // )
+    Posts.findAll({
+      attributes: ["postDate", "content", "image", "audio", "id"],
+      include: [{
+        model: Users,
+        attributes: ["firstName", "lastName", "profilePic"],
+        on: {
+          id: sequelize.where(sequelize.col("user.id"), "=", sequelize.col("posts.userID"))
+        },
+      }],
+      where: {
+        userID: {
+          [Op.in]: sequelize.literal(
+            '(SELECT users.id FROM users INNER JOIN followingRelationship ' +
+            'WHERE followingRelationship.followerID = users.id ' +
+            'AND followingRelationship.userID = ' + userID + 
+            ')'
+          )
+        }
+      },
+      order: [
+        ["postDate", "DESC"]
+      ]
+    })
+      .then(data => {
+        //console.log(data);
+        res.send(data);
+      })
+      .catch(err => {
+        res.status(500).send(
+          err
+        );
+      });
+  }
+  else if(postType == "strangers") {
+    // SELECT users.firstName, users.lastName, users.profilePic, posts.postDate, posts.content, posts.image, posts.audio, posts.id
+    // FROM users INNER JOIN posts
+    // WHERE users.id = posts.userID
+    // AND posts.userID != 2
+    // AND posts.userID NOT IN (
+    //    SELECT users.id FROM users join followingRelationship
+    //    WHERE followingRelationship.followerID = users.id
+    //    AND followingRelationship.userID = 2
+    // )
+  }
+  else 
+    res.send({message: "An error occurred while loading posts."})
+
 }
 
 // Retrieve all posts made by a specific user
 exports.getUserPosts =  (req, res) => {
-  
+  var userID = req.params.id;
+
+  // SELECT users.firstName, users.lastName, users.profilePic, posts.postDate, posts.content, posts.image, posts.audio, posts.id
+  // FROM users INNER JOIN posts
+  // WHERE users.id = posts.userID
+  // AND posts.userID = :id
+  Users.findAll({
+    attributes: ["firstName", "lastName", "profilePic", "posts.id"],
+    include: [{
+      model: Posts,
+      attributes: ["postDate", "content", "image", "audio", "id"],
+      on: {
+        userID: sequelize.where(sequelize.col("users.id"), "=", sequelize.col("posts.userID"))
+      },
+      where: {
+        userID: userID 
+      }
+    }],
+  })
+    .then(data => {
+      //console.log(data);
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send(
+        err
+      );
+    });
+}
+
+// Retrieve the number of likes based on a postID 
+exports.getLikes = (req, res) => {
+  var postID = req.params.id;
+
+  // SELECT postID
+  // FROM posts INNER JOIN postFavorites
+  // WHERE postFavorites.postID = posts.id
+  // AND posts.id = 1
+  PF.findAll({
+    attributes: ["postID"],
+    include: [{
+      model: Posts,
+      attributes: [],
+      require: true,
+      on: {
+        [Op.and]: [
+          {id: postID},
+          {id: sequelize.where(sequelize.col("postFavorites.postID"), "=", sequelize.col("post.id"))}
+        ]
+      }
+    }]
+  })
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send(
+        err
+      );
+    });
+}
+
+// Retrieve the comments based on a postID
+exports.getComments = (req, res) => {
+  var postID = req.params.id;
+
+  res.send({id: postID});
 }
