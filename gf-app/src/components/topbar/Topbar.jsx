@@ -29,6 +29,18 @@ class App extends Component {
     alert("Gigs page coming soon!");  
   }
 
+  showPerson() {
+    alert("Will be implemented in the future.");
+  }
+
+  showMessages() {
+    alert("DM's will be implemented in the future.");
+  }
+
+  showNotifications() {
+    alert("Notifications will be implemented in the future.");
+  }
+
   logOut() {
     localStorage.removeItem("ID");
     window.location = "/Login";
@@ -58,15 +70,15 @@ class App extends Component {
             <span onClick={this.toGigs.bind(this)} className="topbarLink">Gigs</span>
           </div>
           <div className="topbarIcons">
-            <div className="topbarIconItem">
+            <div onClick={this.showPerson.bind(this)} className="topbarIconItem">
               <Person />
               <span className="topbarIconBadge">1</span>
             </div>
-            <div className="topbarIconItem">
+            <div onClick={this.showMessages.bind(this)} className="topbarIconItem">
               <Chat />
               <span className="topbarIconBadge">3</span>
             </div>
-            <div className="topbarIconItem">
+            <div onClick={this.showNotifications.bind(this)} className="topbarIconItem">
               <Notifications />
               <span className="topbarIconBadge">1</span>
             </div>
