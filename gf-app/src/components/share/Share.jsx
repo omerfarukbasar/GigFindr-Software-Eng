@@ -19,6 +19,26 @@ class App extends Component {
       this.setState({postContent: e.target.value})
   }
 
+  uploadPhoto() {
+    alert("Uploading photos will be implemented soon.");
+  }
+
+  uploadVideo() {
+    alert("Uploading videos will be implemented soon.");
+  }
+
+  uploadAudio() {
+    alert("Uploading audio will be implemented soon.");
+  }
+
+  uploadFile() {
+    alert("Uploading files will be implemented soon.");
+  }
+
+  addLocation() {
+    alert("Adding locations to posts will be implemented soon.");
+  }
+
   submit() {
     //alert('Post will be posted soon enough!\nInput: '+this.state.postContent);
     // Create data to send to API
@@ -35,7 +55,7 @@ class App extends Component {
       .then(response => response.json()) // was .json()
       .then(data => {
         // Debug
-        console.log(data);
+        //console.log(data);
         
         // Check message
         if(!data.sent)
@@ -64,23 +84,23 @@ class App extends Component {
           <hr className="shareHR"/>
           <div className="shareBottom">
             <div className="shareOptions">
-              <div className="shareOption">
+              <div onClick={this.uploadPhoto.bind(this)} className="shareOption">
                 <PermMedia htmlColor="orange" className="shareIcon" />
                 <span className="shareOptionText">Photo</span>
               </div>
-              <div className="shareOption">
+              <div onClick={this.uploadVideo.bind(this)} className="shareOption">
                 <VideoLibrary htmlColor="blue" className="shareIcon" />
                 <span className="shareOptionText">Video</span>
               </div>
-              <div className="shareOption">
+              <div onClick={this.uploadAudio.bind(this)} className="shareOption">
                 <LibraryMusic htmlColor="green" className="shareIcon" />
                 <span className="shareOptionText">Audio</span>
               </div>
-              <div className="shareOption">
+              <div onClick={this.uploadFile.bind(this)} className="shareOption">
                 <Description htmlColor="grey" className="shareIcon" />
                 <span className="shareOptionText">File</span>
               </div>
-              <div className="shareOption">
+              <div onClick={this.addLocation.bind(this)} className="shareOption">
                 <Room htmlColor="tomato" className="shareIcon" />
                 <span className="shareOptionText">Location</span>
               </div>

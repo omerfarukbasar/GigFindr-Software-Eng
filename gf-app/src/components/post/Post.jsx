@@ -6,6 +6,7 @@ import "./post.css"
 export default function Post(postContent) {
   var postID = postContent.postID;
 
+  // Needs Work
   function getLikes(postID) {
     var likeCount = 0;
     var likesCounted = false;

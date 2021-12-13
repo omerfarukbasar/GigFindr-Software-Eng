@@ -202,11 +202,11 @@ exports.findFriends = (req, res) => {
     });
 }
 
-// Retrieve people who aren't friends with user (Update)
+// Retrieve people who aren't friends with user (Update to filter type of user)
 exports.getPeople = (req, res) => {
   // Gather data from url
   const userID = req.params.id;
-  const type = req.params.type;
+  const type = req.params.type; // Distinguish Musicians from Venues
   
   // SELECT DISTINCT firstName, lastNam FROM users WHERE users.id != :id 
   //  AND users.id NOT IN (
@@ -244,6 +244,11 @@ exports.getPeople = (req, res) => {
     });
 }
 
+// Add friends <= Implement
+exports.addFriend = (req, res) => {
+
+}
+
 // Update a user by id 
 exports.update = (req, res) => {
   
@@ -256,7 +261,7 @@ exports.delete = (req, res) => {
 
 // ==== POST STUFF ====//
 
-// Create a new post <= Update eventually
+// Create a new post <= Update to handle photos, audio, etc.
 exports.newPost = (req, res) => {
   var postContent = req.body;
   var post = null;
@@ -289,24 +294,24 @@ exports.newPost = (req, res) => {
       userID: postContent.id
     }
 
+    // Save post to the database
+    Posts.create(post)
+    .then(data => {
+      // Send confirmation message
+      res.send({sent: true});
+    })
+    .catch(err => {
+      res.status(500).send(/*{sent: false}*/{
+        message:
+          err.message || "Some error occurred while creating the Tutorial."
+          
+      });
+    });
+
   }
   else {
     res.send({sent: false});
   }
-
-  // Save post to the database
-  Posts.create(post)
-  .then(data => {
-    // Send confirmation message
-    res.send({sent: true});
-  })
-  .catch(err => {
-    res.status(500).send(/*{sent: false}*/{
-      message:
-        err.message || "Some error occurred while creating the Tutorial."
-        
-    });
-  });
 
 }
 
@@ -439,7 +444,7 @@ exports.getLikes = (req, res) => {
     });
 }
 
-// Retrieve the comments based on a postID
+// Retrieve the comments based on a postID <= Implement
 exports.getComments = (req, res) => {
   var postID = req.params.id;
 

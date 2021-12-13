@@ -51,7 +51,7 @@ class App extends Component {
           var friendPost = data[0];
           var userPost = data[1];
 
-          //console.log(data[1]);
+          //console.log(userPost);
 
           // Get Friend's posts (update to handle array of arrays)
           for(var i=0; i < friendPost.length; i++) {
@@ -89,6 +89,8 @@ class App extends Component {
             // Get objects
             var postObj = userPost[i].posts[0];
             var userObj = userPost[i];
+
+            console.log(postObj);
       
             // Assign values to be passed through
             var accName = userObj.firstName + " " + userObj.lastName;
@@ -107,7 +109,7 @@ class App extends Component {
             let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
             let yyyy = today.getFullYear();
 
-            var todayDate = yyyy + '-' + mm + '-' + "10";
+            var todayDate = yyyy + '-' + mm + '-' + dd;
 
             // Only get the user's post for the feed if its new
             if(date == todayDate) {
