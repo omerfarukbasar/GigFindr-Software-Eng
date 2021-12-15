@@ -28,6 +28,8 @@ app.get("/", (req, res) => {
 // Other routes
 require("./app/routes/userRoute.js")(app);
 
+require("./app/routes/frRoute.js")(app);
+
 require("./app/routes/loginRoute.js")(app);
 
 require("./app/routes/postRoute.js")(app);

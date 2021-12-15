@@ -1,7 +1,27 @@
 import "./rightbar.css"
 
 export default function Rightbar() {
-  function followAccount() {
+  function followAccount(friendID) {
+    fetch('http://localhost:8443/apiu/users/addFriend/'+localStorage.getItem("ID")+'/'+friendID, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => response.json()) // was .json()
+    .then(data => {
+      if(data.added) {
+        alert('Added!');
+        window.location = "/Home";
+      }
+      else {
+        alert('Something went wrong');
+      }
+      
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    })
 
   }
 
@@ -24,6 +44,7 @@ export default function Rightbar() {
         data.forEach((account) => {
           // Create account name variable
           var accountName = account.firstName + " " + account.lastName;
+          var accountID = account.id;
 
           // Create components
           let div = document.createElement("div");
@@ -44,7 +65,30 @@ export default function Rightbar() {
          let button = document.createElement("button");
          button.className = "followButton";
          button.innerHTML = "+ Follow";
-         button.onclick = function() {alert(accountName + ' will be added soon!')};
+         //button.onclick = function() {alert(accountName + ' will be added soon!\nID: '+accountID)};
+
+         button.onclick = function() {
+          fetch('http://localhost:8443/api/FR/add/'+localStorage.getItem("ID")+'/'+accountID, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          })
+            .then(response => response.json()) // was .json()
+            .then(data => {
+              if(data.added) {
+                alert('Added!');
+                window.location = "/Home";
+              }
+              else {
+                alert('Something went wrong');
+              }
+              
+            })
+            .catch((error) => {
+              console.error('Error:', error);
+            })
+         };
 
          let li = document.createElement("li");
          li.className = "suggestion";
