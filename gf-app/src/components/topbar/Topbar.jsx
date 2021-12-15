@@ -7,7 +7,27 @@ import { Component } from "react";
 class App extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      profilePic: "/assets/test-musician.png"
+    }
+
+    fetch('http://localhost:8443/api/users/'+localStorage.getItem("ID"), {
+      method: 'GET',
+      headers: {
+      'Content-Type': 'application/json'
+      }
+    })
+    .then(response => response.json()) // was .json()
+    .then(data => {
+      if(data.profilePic == null) {}
+      else
+        this.setState({profilePic: data.profilePic});
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    })
   }
+
 
   toHome() {
     window.location = "/Home";
@@ -83,7 +103,7 @@ class App extends Component {
               <span className="topbarIconBadge">1</span>
             </div>
           </div>
-          <img onClick={this.logOut.bind(this)} src="/assets/test-musician.png" alt="Man" className="topbarProfile" /*onClick={localStorage.removeItem("ID"), window.location="/Login"}*//>
+          <img onClick={this.logOut.bind(this)} src={this.state.profilePic} alt="Man" className="topbarProfile" /*onClick={localStorage.removeItem("ID"), window.location="/Login"}*//>
         </div>
       </div>
     );

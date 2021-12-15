@@ -26,6 +26,7 @@ db.users = require("./userModels.js")(sequelize, Sequelize);
 db.posts = require("./postModels.js")(sequelize, Sequelize);
 db.followingRelationship = require("./followingRelationshipModels.js")(sequelize, Sequelize);
 db.postFavorites = require("./postFavoritesModels.js")(sequelize, Sequelize);
+db.musicians = require("./musicianModels.js")(sequelize, Sequelize);
 
 // Create relationships
 db.users.hasMany(db.followingRelationship);
@@ -34,5 +35,7 @@ db.users.hasMany(db.posts);
 db.posts.belongsTo(db.users);
 db.posts.hasMany(db.postFavorites);
 db.postFavorites.belongsTo(db.posts);
+//db.users.hasMany(db.musicians);
+//db.musicians.hasMany(db.users);
 
 module.exports = db;

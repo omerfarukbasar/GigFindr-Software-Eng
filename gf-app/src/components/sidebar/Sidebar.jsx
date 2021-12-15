@@ -46,7 +46,10 @@ export default function Sidebar() {
         document.getElementById("name").innerHTML = firstName + " " + lastName;
         document.getElementById("username").innerHTML = "@"+userName;
         document.getElementById("usertype").innerHTML = userType;
-        //document.getElementById("profilepic").src = profilePic;
+
+        if(profilePic == null) {}
+        else
+          document.getElementById("profilepic").src = profilePic;
 
         // Add the visit profile button
         var p = document.getElementById("profileButton");
@@ -73,7 +76,12 @@ export default function Sidebar() {
             div.className = "sidebarProfileImgContainer";
 
             let img = document.createElement("img");
-            img.src = "/assets/john-doe.jpg";
+
+            if(friend.profilePic == null)
+              img.src = "/assets/john-doe.jpg";
+            else
+              img.src = friend.profilePic;
+
             img.alt = friend.firstName + "'s Image";
             img.className = "friendsImg";
             /*
