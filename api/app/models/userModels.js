@@ -7,7 +7,7 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING
       },
       profilePic: {
-        type: Sequelize.BLOB
+        type: Sequelize.STRING
       },
       firstName: {
         type: Sequelize.STRING

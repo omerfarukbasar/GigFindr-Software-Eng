@@ -2,11 +2,12 @@ const { json, QueryTypes } = require("sequelize/dist");
 const db = require("../models");
 const userModels = require("../models/userModels");
 const postModels = require("../models/postModels");
-const { sequelize, users, Sequelize } = require("../models");
+const { sequelize, users, Sequelize, musicians } = require("../models");
 const Users = db.users;
 const Posts = db.posts;
 const FR = db.followingRelationship;
 const PF = db.postFavorites;
+const Musicians = db.musicians;
 const Op = db.Sequelize.Op;
 
 // ==== USER STUFF ====//
@@ -147,10 +148,41 @@ exports.findOne = (req, res) => {
     const id = req.params.id;
 
     // Select id, userName, firstName, lastName FROM users WHERE userID = id
-    Users.findByPk(id, {attributes: ["id", "userName", "firstName", "lastName", "type", "profilePic"]})
+    Users.findByPk(id, {
+      attributes: ["id", "userName", "firstName", "lastName", "type", "profilePic"]
+    })
       .then(data => {
         if (data) {
-         res.send(data);
+          if(data.type == "Musician") {
+            res.send(data);
+/*
+            Users.findAll({
+              attributes: ["id", "userName", "firstName", "lastName", "type", "profilePic"],
+              include: [{
+                model: Musicians,
+                attributes: ["talentList"],
+                on:{
+                  userID: sequelize.where(sequelize.col("users.id"), "=", sequelize.col("musicians.userID")),
+                }
+              }],
+              where: {
+                id: id
+              }
+            })
+              .then(data => {
+                res.send(data);
+              })
+              .catch(err => {
+                res.status(500).send({
+                  message: "Error retrieving a user with id=" + id
+               });
+              });
+*/            
+          }
+          else if(data.type == "Venue") {
+            res.send(data);
+          }
+          
         } 
         else {
           res.status(404).send({
