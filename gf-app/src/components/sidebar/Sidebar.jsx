@@ -47,7 +47,8 @@ export default function Sidebar() {
         document.getElementById("username").innerHTML = "@"+userName;
         document.getElementById("usertype").innerHTML = userType;
 
-        if(profilePic == null) {}
+        if(profilePic == null) 
+          document.getElementById("profilepic").src = "/assets/test-musician.png";
         else
           document.getElementById("profilepic").src = profilePic;
 
@@ -117,7 +118,7 @@ export default function Sidebar() {
       <div className="sidebar">
         <div className="sidebarWrapper">
           <div className="card">
-            <img id="profilepic" src="/assets/test-musician.png" alt="Man" className="card-img"/>
+            <img id="profilepic" src="" alt="Profile Pic" className="card-img"/>
             <h1 id="name"></h1>
             <p class="title" id="username"></p>
             <h2 id="usertype"></h2>
