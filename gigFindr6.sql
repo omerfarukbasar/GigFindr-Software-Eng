@@ -31,8 +31,8 @@ CREATE TABLE `comments` (
   PRIMARY KEY (`id`),
   KEY `FK_comment1` (`postID`),
   KEY `FK_comment2` (`userID`),
-  CONSTRAINT `FK_comment1` FOREIGN KEY (`postID`) REFERENCES `posts` (`postID`),
-  CONSTRAINT `FK_comment2` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`)
+  CONSTRAINT `FK_comment1` FOREIGN KEY (`postID`) REFERENCES `posts` (`id`),
+  CONSTRAINT `FK_comment2` FOREIGN KEY (`userID`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -60,8 +60,8 @@ CREATE TABLE `followingRelationship` (
   PRIMARY KEY (`id`),
   KEY `FK_fr1` (`userID`),
   KEY `FK_fr2` (`followerID`),
-  CONSTRAINT `FK_fr1` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`),
-  CONSTRAINT `FK_fr2` FOREIGN KEY (`followerID`) REFERENCES `users` (`userID`)
+  CONSTRAINT `FK_fr1` FOREIGN KEY (`userID`) REFERENCES `users` (`id`),
+  CONSTRAINT `FK_fr2` FOREIGN KEY (`followerID`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -90,7 +90,7 @@ CREATE TABLE `musicians` (
   `userID` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_musicians` (`userID`),
-  CONSTRAINT `FK_musicians` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`)
+  CONSTRAINT `FK_musicians` FOREIGN KEY (`userID`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -119,8 +119,8 @@ CREATE TABLE `postFavorites` (
   PRIMARY KEY (`id`),
   KEY `FK_favorites1` (`postID`),
   KEY `FK_favorites2` (`userID`),
-  CONSTRAINT `FK_favorites1` FOREIGN KEY (`postID`) REFERENCES `posts` (`postID`),
-  CONSTRAINT `FK_favorites2` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`)
+  CONSTRAINT `FK_favorites1` FOREIGN KEY (`postID`) REFERENCES `posts` (`id`),
+  CONSTRAINT `FK_favorites2` FOREIGN KEY (`userID`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -149,9 +149,9 @@ CREATE TABLE `posts` (
   `audio` longblob,
   `postDate` date NOT NULL,
   `userID` int NOT NULL,
-  PRIMARY KEY (`postID`),
+  PRIMARY KEY (`id`),
   KEY `FK_post` (`userID`),
-  CONSTRAINT `FK_post` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`)
+  CONSTRAINT `FK_post` FOREIGN KEY (`userID`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -214,7 +214,7 @@ CREATE TABLE `venue` (
   `userID` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_venue` (`userID`),
-  CONSTRAINT `FK_venue` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`)
+  CONSTRAINT `FK_venue` FOREIGN KEY (`userID`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
