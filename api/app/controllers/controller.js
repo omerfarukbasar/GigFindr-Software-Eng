@@ -109,7 +109,7 @@ exports.create = (req, res) => {
         .catch(err => {
           res.status(500).send({
             message:
-              err.message || "Some error occurred while creating the Tutorial."
+              err.message || "Some error occurred while creating the User."
           });
         });
 
@@ -202,6 +202,49 @@ exports.findFriends = (req, res) => {
     });
 }
 
+// Add a friend
+exports.addFriend = (req, res) => {
+  var userID = req.params.id;
+  var followerID = req.params.otherID;
+
+  // Add friend to the user first, then add to the other user
+  // Create the first friend obj
+  const userSide = {
+    userID: userID,
+    followerID: followerID
+  };
+
+  // Save to DB
+  FR.create(userSide)
+    .then(data => {
+      // Create the second friend obj
+      const friendSide = {
+        userID: followerID,
+        followerID: userID
+      };
+
+      // Save to DB
+      FR.create(friendSide)
+        .then(data => {
+          // Successful, send back to server
+          res.send({added: true});
+        })
+        .catch(err => {
+          res.status(500).send({
+            message:
+              err.message || "Some error occurred while creating the User."
+          });
+        });
+
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+              err.message || "Some error occurred while creating the User."
+      });
+    });
+}
+
 // Retrieve people who aren't friends with user (Update to filter type of user)
 exports.getPeople = (req, res) => {
   // Gather data from url
@@ -217,7 +260,7 @@ exports.getPeople = (req, res) => {
   Users.findAll({
     attributes: [
       [Sequelize.fn('DISTINCT', Sequelize.col('firstName')) ,'firstName'],
-      'lastName'
+      'lastName', 'id'
     ],
     distinct: true,
     where: {
@@ -242,11 +285,6 @@ exports.getPeople = (req, res) => {
         err
       );
     });
-}
-
-// Add friends <= Implement
-exports.addFriend = (req, res) => {
-
 }
 
 // Update a user by id 
