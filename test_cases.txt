@@ -1,0 +1,115 @@
+Current Test Models:
+
+Account Creation Feature:
+    Test Case 1: Attempted account creation with null input
+    Expected: Prompt stating that null input isn't accepted
+    Result: Passed
+
+    Test Case 2: Attempted account creation with pre-existing email in the system
+    Expected: Prompt stating that email is already in use
+    Result: Passed
+
+    Test Case 3: Attempted account creation with pre-existing username in the system
+    Expected: Prompt stating that username is already in use
+    Result: Passed
+
+    Test Case 4: Attempted account creation with non-existing email/username in the system
+    Expected: Account is created successfully with confirmation prompt
+    Result: Passed
+
+
+
+Account Login Feature: 
+    Test Case 1: Attempted login with null input
+    Expected: Prompt stating to enter login info
+    Result: Passed
+
+    Test Case 2: Attempted login with incorrect password on an existing account
+    Expected: Prompt stating incorrect username/password combo
+    Result: Passed
+
+    Test Case 3: Attempted login with a non-existing account
+    Expected: Prompt stating incorrect username/password combo
+    Result: Passed
+
+    Test Case 4: Attempted login with correct password on an existing account
+    Expected: Takes user to home page feed upon credential verification
+    Result: Passed
+
+
+
+
+Post features:
+    Test Case 1: Attempt to create a post utilizing null input
+    Expected: Prompt stating null input isn't accepted
+    Result: Passed
+
+    Test Case 2: Attempt to create a post utilizing only text
+    Expected: Post is created and is shown on feed
+    Result: Passed
+
+    Test Case 3: Attempt to create a post utilizing only an image
+    Expected: Post is created and displayed on feed
+    Result: Passed
+
+    Test Case 4: Attempt to create a post utilizing both text and an image
+    Expected: Post is created and both are visible on the feed
+    Result: Passed
+
+    Test Case 5: Attempt to delete a post
+    Expected: Post is removed from the feed
+    Result: Untested, program missing certain aspects required
+
+
+
+Interactive Features:
+    Test Case 1: Attempt to comment on account
+    Expected: User's comment is displayed underneath intended user's account
+    Result: Untested, to be added in a future iteration
+
+    Test Case 2: Attempt to follow a user
+    Expected: Follow confirmation is displayed
+    Result: Passed
+
+
+
+
+
+Test Models for Future Versions
+Post features:
+    Test Case 1: Attempt to create a post utilizing audio attachment
+    Expected: Post with audio clip is displayed on feed
+
+    Test Case 2: Attempt to like a post
+    Expected: Post increments like count by one
+
+    Test Case 3: Attempt to remove your from a post
+    Expected: Post decrements like count by one
+
+    Test Case 3: Attempt to remove your from a post
+    Expected: Post decrements like count by one
+
+Friend features:
+    Test Case 1: Attempt to message a friend
+    Expected: Prompt to display requested messag content and send to friend
+
+    Test Case 2: Attempt to remove a friend
+    Expected: Confirmation prompt appears stating that friend is removed
+
+Gig features:
+    Test Case 1: Attempt to create a gig posting type
+    Expected: Prompt asking for venue info is shown, once submitted, it should be posted on feed
+
+    Test Case 2: Attempt to apply to a gig posting
+    Expected: Prompt with application questions appear, once submitted, it should be sent as a message to venue
+
+Search features:
+    Test Case 1: Attempt to search for a specific user
+    Expected: Screen should display specified user
+
+    Test Case 2: Attempt to search for a specific venue
+    Expected: Screen should display specified user
+
+    Test Case 3: Attempt to search using null input
+    Expected: Prompt stating null input isn't accepted
+
