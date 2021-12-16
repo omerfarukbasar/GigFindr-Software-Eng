@@ -1,8 +1,7 @@
 import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
+import UserProfile from "./pages/UserProfile/UserProfile";
 import { Route } from "react-router-dom";
-import "./components/userProfile";
-import UserProfile from "./components/userProfile";
 
 // Fix this
 function App() {
