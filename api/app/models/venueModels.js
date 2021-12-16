@@ -1,12 +1,9 @@
 module.exports = (sequelize, Sequelize) => {
-    const Musicians = sequelize.define("musicians", {
-        age: {
+    const Venues = sequelize.define("venue", {
+        capacity: {
             type: Sequelize.INTEGER
         },
-        yearOfExperience: {
-            type: Sequelize.INTEGER
-        },
-        talentList: {
+        vibe: {
             type: Sequelize.STRING
         },
         userID: {
@@ -25,8 +22,8 @@ module.exports = (sequelize, Sequelize) => {
       updatedAt: false,
 
       // Set the model name
-      tableName: 'musicians'
+      tableName: 'venue'
     });
 
-    return Musicians;
+    return Venues;
 }

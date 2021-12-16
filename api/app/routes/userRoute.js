@@ -6,6 +6,11 @@ module.exports = app => {
     // Retrieve all Users
     router.get("/", users.findAll);
 
+    // Retrieve all musicians
+    router.get("/getMusicians/:id", users.getMusicians);
+
+    router.get("/getVenues/:id", users.getVenues);
+
     // Retrieve a single user
     router.get("/:id", users.findOne);
 
