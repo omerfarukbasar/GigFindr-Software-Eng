@@ -8,6 +8,7 @@ const Posts = db.posts;
 const FR = db.followingRelationship;
 const PF = db.postFavorites;
 const Musicians = db.musicians;
+const Venues = db.venues;
 const Op = db.Sequelize.Op;
 
 // ==== USER STUFF ====//
@@ -131,9 +132,9 @@ exports.findAll = (req, res) => {
 
     // SELECT id, userName FROM users
     Users.findAll({attributes: ['id', 'userName']},{ where: condition })
-    	.then(data => {
-        	res.send(data);
-    	})
+      .then(data => {
+          res.send(data);
+      })
 
       .catch(err => {
         res.status(500).send({
@@ -142,6 +143,56 @@ exports.findAll = (req, res) => {
         });
       });
 };
+
+// Get a list of musicians
+exports.getMusicians = (req, res) => {
+  const userID = req.params.id;
+
+  Users.findAll({
+    attributes: ['firstName', 'lastName'],
+    include: [{
+      model: Musicians,
+      attributes: ['talentList', 'yearOfExperience', 'age']
+    }],
+    where: {
+      type: "Musician"
+    }
+  })
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+          message:
+          err.message || "Some error occurred while retrieving users."
+      });
+    });
+}
+
+// Get a list of venues
+exports.getVenues = (req, res) => {
+  const userID = req.params.id;
+
+  Users.findAll({
+    attributes: ['firstName', 'lastName', 'userName'],
+    include: [{
+      model: Venues,
+      attributes: ['vibe'],
+    }],
+    where: {
+      type: "Venue"
+    }
+  })
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+          message:
+          err.message || "Some error occurred while retrieving users."
+      });
+    });
+}
 
 // Find a single user with an id
 exports.findOne = (req, res) => {
