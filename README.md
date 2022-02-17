@@ -1,6 +1,6 @@
 # GigFindr - Software Engineering Final, 2021
 
-## Project Description
+## Project Preview
 ![Home](images/Gigfindr-Home.png)
 ![Signup](images/Gigfindr-Signin.png)
 ![Login](images/Gigfidr-Login.png)
