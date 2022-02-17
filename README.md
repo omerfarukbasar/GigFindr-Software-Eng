@@ -1,8 +1,9 @@
-# GigFindr - Software-Eng-Final 2021
-link: [not applicable]
+# GigFindr - Software Engineering Final, 2021
 
 ## Project Description
-[to be updated]
+![Home](images/Gigfindr-Home.png)
+![Signup](images/Gigfindr-Signin.png)
+![Login](images/Gigfidr-Login.png)
 
 ## Roles
 **Role#1**: Will Torres, Front-end Developer
@@ -25,21 +26,10 @@ If no link was provided above, then one should:
 - Run `npm start` to run the application on a local host
 
 ### How to run api:
----
+- Have node.js & npm installed on your machine 
+- Install & initialize MySQLWorkbench
+- Import database 
+- Configure `app/config/dbConfig.js` to match your username & password
+- Run `npm start` in project root directory on terminal
+- Navigate to http://localhost/8443 on your web browser
 
-> Have node.js & npm installed on your machine
-> 
-> Install & initialize MySQLWorkbench
-> 
-> Import database 
-> 
-> Configure `app/config/dbConfig.js` to match your username & password
-> 
-> Run `npm start` in project root directory on terminal
-> 
-> Navigate to http://localhost/8443 on your web browser
-
-<hr>
-
-### Project: Diagrams and Models
-### Project: Sprint
