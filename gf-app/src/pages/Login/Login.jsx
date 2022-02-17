@@ -6,8 +6,6 @@ import Home from "../Home/Home";
 import React from "react";
 import { Redirect } from "react-router-dom";
 import "./Login.css";
-import "../../components/userProfile";
-import UserProfile from "../../components/userProfile";
 const { Component } = React;
 
 class App extends Component {
@@ -223,7 +221,6 @@ class SignIn extends Component {
             
             // Set cookie ID
             localStorage.setItem("ID", data.id);
-            UserProfile.setID(data.id);
 
             // Route user to home
             window.location = "/Home";
